@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Index page</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container" align="center">
+        <form action="/ajouterOnce" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control w-50" id="nom" name="nom">
+                <span class="text-danger"  th:errors="${produit.nom}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <!-- Use input type="file" for file uploads -->
+                <input type="file" class="form-control w-50" id="image" name="image">
+                <span class="text-danger"  th:errors="${produit.image}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="text" class="form-control w-50" id="quantity" name="quantity">
+                <span class="text-danger"  th:errors="${produit.quantity}"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="prix" class="form-label">Prix</label>
+                <input type="text" class="form-control w-50" id="prix" name="prix">
+                <span class="text-danger"  th:errors="${produit.prix}"></span>
+
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control w-50" id="description" name="description">
+                <span class="text-danger"  th:errors="${produit.description}"></span>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary form-control w-50" value="Ajouter">Ajouter</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
