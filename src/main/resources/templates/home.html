@@ -1,25 +1,155 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template">
+      layout:decorate="template" xmlns:margin-left="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Datte Store</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <style>
-        body{
-            background-image: url("/static/background.jpeg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
+        section{
+            padding: 2rem 9%;
         }
+        .home{
+            display: flex;
+            align-items: center;
+            min-height: 88vh;
+            background: url('image/background.jpeg');
+            background-repeat : no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .content{
+            max-width: 50rem;
+            margin-top: 7%;
+
+        }
+        h3{
+            font-size: 4.2rem;
+            color: #333;
+        }
+        span{
+            font-size: 4.2rem;
+            color: var(--bs-orange);
+            padding: 1rem 0;
+            line-height: 1.5;
+        }
+        #p1{
+            font-size: 2.1rem;
+            color: #fff;
+            padding: 1rem 0;
+            line-height: 1.5;
+        }
+        .btn{
+            display: inline-block;
+            margin-top: 1rem;
+            border-radius: 5rem;
+            background: #333;
+            color: #fff;
+            padding: .9rem 3.5rem;
+            cursor:pointer;
+            font-size: 1.7rem;
+        }
+        .btn:hover{
+            background: var(--bs-orange);
+        }
+        img{
+            width:250px;
+            height: 25rem;
+
+        }
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centrer les boîtes horizontalement */
+            gap: 1rem; /* Espace entre les boîtes */
+            margin-top: 3%;
+            margin-bottom: 3rem;
+        }
+
+        .box {
+            width: 300px; /* Largeur fixe des boîtes */
+            height: 300px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            display: inline-block;
+            vertical-align: top;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            margin-bottom: 1rem; /* Espacement vertical entre les boîtes */
+        }
+
+
+        .box:hover{
+            transform: scale(1.1);
+        }
+
+
+
+        .image{
+            position: relative;
+            text-align: center;
+            padding-top: 2rem;
+            overflow: hidden;
+            width: 100%; /* Largeur de l'image */
+            height: 100%; /* Hauteur de l'image */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
-<div layout:fragment="content">
-<p>datte store </p>
 
+<div layout:fragment="content">
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Nos Dattes Délicieuses</h3>
+            <span>Succulentes Dattes</span>
+            <p id="p1">
+                Les dattes sont des fruits sucrés cultivés dans des régions chaudes et arides depuis des millénaires.
+            </p>
+            <a th:href="@{/listProduit}" class="btn">Découvrir notre Dattes</a>
+
+        </div>
+    </section>
+    <section class="products" id="products">
+        <div class="box-container">
+            <div class="box">
+                <div class="image">
+                    <a th:href="@{/infodatte}" ><img src="image/datte3.jpeg"></a>
+                    <div class="icons" style="display: flex; justify-content: center;">
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <a th:href="@{/infodatte}" ><img src="image/datte9.jpeg"></a>
+                    <div class="icons" style="display: flex; justify-content: center;">
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+                    <a th:href="@{/infodatte}" ><img src="image/datte14.jpeg"></a>
+                    <div class="icons" style="display: flex; justify-content: center;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </section>
 
 </div>
 

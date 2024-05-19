@@ -4,16 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.xproce.datte.dao.entities.Category;
-import org.xproce.datte.dao.entities.Produit;
-import org.xproce.datte.dao.entities.User;
-import org.xproce.datte.dao.repositories.ProduitRepository;
 import org.xproce.datte.service.ProduitManager;
-
-import java.util.ArrayList;
 
 @SpringBootApplication
 public class DatteApplication implements CommandLineRunner {

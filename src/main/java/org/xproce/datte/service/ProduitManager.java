@@ -15,4 +15,5 @@ public interface ProduitManager {
     public Produit getProduitById(Integer id);
     public Produit updateProduit(Produit produit);
     public boolean deleteProduit(Integer id);
+    public List<Produit> getProduit();
 }

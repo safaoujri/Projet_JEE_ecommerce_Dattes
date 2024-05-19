@@ -35,16 +35,17 @@
                         <th>Nom</th>
                         <th>Image</th>
                         <th>Quantity</th>
-                        <th>Description</th>
                         <th>Prix</th>
-                        <th colspan="2">Action</th>
+                        <th>Description</th>
+                        <th colspan="2" sec:authorize="hasRole('manage')">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="p:${listProduits}">
                         <td th:text="${p.id}"></td>
                         <td th:text="${p.nom}"></td>
-                        <td th:text="${p.image}"></td>
+                        <td > <img th:src="@{|image/${p.image}|}" alt="Image " width="80" height="70" >
+                        </td>
                         <td th:text="${p.quantity}"></td>
                         <td th:text="${p.prix}"></td>
                         <td th:text="${p.description}"></td>
@@ -91,9 +92,7 @@
 <div sec:authorize="hasRole('user')">
     This content is only shown to users.
 </div>
-<div sec:authorize="hasRole('managetable')">
-    This content is only shown to managers.
-</div>
+
 </div>
 </body>
 </html>

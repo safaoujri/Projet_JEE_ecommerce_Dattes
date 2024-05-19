@@ -5,16 +5,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Command {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private Date dateCommande;
+    private double montant;
+    @ManyToOne
+    private Utilisateur utilisateur;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Produit> produits;
     @OneToOne
-    private Produit produit;
-
+    private PaymentCart paiement;
 }

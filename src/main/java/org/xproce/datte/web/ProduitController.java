@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.xproce.datte.dao.entities.Produit;
 import org.xproce.datte.service.ProduitManager;
 
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 public class ProduitController {
@@ -33,11 +35,17 @@ public class ProduitController {
                                        @RequestParam(name = "image") String image,
                                        @RequestParam(name = "quantity") int quantity,
                                        @RequestParam(name = "prix") int prix,
-                                       @RequestParam(name = "description") String description){
+                                       @RequestParam(name = "description") String description)
+    {
+        Produit produit=new Produit();
+        produit.setNom(nom);
+        produit.setImage(image);
+        produit.setQuantity((quantity));
+        produit.setPrix(prix);
+        produit.setDescription(description);
+        produitManager.addProduit(produit);
 
 
-            Produit produit = new Produit(id, nom, image, quantity, prix, description);
-            produitManager.addProduit(produit);
 
 
         return "redirect:/indexpage";
@@ -97,5 +105,15 @@ public class ProduitController {
     @GetMapping("/loginpage")
     public String login() {
         return "login";
+    }
+    @GetMapping("/listProduit")
+    public  String list(Model model){
+        List<Produit> produits=produitManager.getProduit();
+        model.addAttribute("list",produits);
+        return "listproduit";
+    }
+    @GetMapping("/infodatte")
+    public String info(){
+        return "infodatte";
     }
 }

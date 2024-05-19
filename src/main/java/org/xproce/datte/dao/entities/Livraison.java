@@ -5,16 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Livraison {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    @OneToOne
-    private Produit produit;
+    private String adresse;
+    private Date dateLivraison;
 
+    @ManyToOne
+    private Produit produit;
 }

@@ -11,7 +11,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container" align="center">
-        <form action="/ajouterOnce" method="post" enctype="multipart/form-data">
+        <form action="ajouterOnce" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control w-50" id="nom" name="nom">
@@ -20,10 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
-                <!-- Use input type="file" for file uploads -->
-                <input type="file" class="form-control w-50" id="image" name="image">
-                <span class="text-danger"  th:errors="${produit.image}"></span>
-
+                <input type="text" class="form-control w-50" id="image" name="image">
             </div>
             <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>

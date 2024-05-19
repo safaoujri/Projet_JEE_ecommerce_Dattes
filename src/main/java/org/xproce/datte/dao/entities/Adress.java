@@ -9,12 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Adress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    @OneToOne
-    private Produit produit;
+    private String rue;
+    private String ville;
+    private String codePostal;
+    private String pays;
+    @ManyToOne
+    private Utilisateur utilisateur;
 
 }

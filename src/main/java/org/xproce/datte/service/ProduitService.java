@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 import org.xproce.datte.dao.entities.Produit;
 import org.xproce.datte.dao.repositories.ProduitRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ProduitService implements ProduitManager{
+
+
     @Autowired
     private ProduitRepository produitRepository;
     @Override
@@ -51,5 +54,10 @@ public class ProduitService implements ProduitManager{
         catch (Exception e){
             return false;
         }
+    }
+    @Override
+    public List<Produit> getProduit() {
+        return  produitRepository.findAll();
+
     }
 }

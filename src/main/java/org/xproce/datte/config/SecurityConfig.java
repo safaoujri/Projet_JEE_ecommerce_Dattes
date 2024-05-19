@@ -1,7 +1,6 @@
 package org.xproce.datte.config;
-import lombok.AllArgsConstructor;
-import org.hibernate.bytecode.internal.bytebuddy.PassThroughInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -16,10 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class ProjectSecurityConfig {
-
-
-
+public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
@@ -28,9 +24,8 @@ public class ProjectSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/ajouter", "/ajouterOnce", "/ajouterproduit",
                                 "/deleteProduit", "/editProduit").authenticated()
-                        .requestMatchers("/indexpage", "/", "/webjars/**").permitAll())
-                //.formLogin((form -> form.loginPage("/loginpage").permitAll()))
-                .formLogin(Customizer.withDefaults())
+                        .requestMatchers("/indexpage", "/","/**", "/webjars/**").permitAll())
+                .formLogin((form -> form.defaultSuccessUrl("/indexpage",true)))
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
@@ -38,26 +33,21 @@ public class ProjectSecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails adminmanager = User.withUsername("adminmanager")
-                .password("12345")
-                .roles("managetable", "delete", "update")
-                //.roles("admin")
-                .build();
+
         UserDetails admin = User.withUsername("admin")
                 .password("12345")
                 //.authorities("admin")
-                .roles("admin","manage")
+                .roles("admin","manage","delete","update")
                 .build();
         UserDetails user = User.withUsername("user")
                 .password("12345")
                 .roles("user")
                 .build();
-        return new InMemoryUserDetailsManager(adminmanager, admin, user);
+        return new InMemoryUserDetailsManager( admin, user);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
 }
