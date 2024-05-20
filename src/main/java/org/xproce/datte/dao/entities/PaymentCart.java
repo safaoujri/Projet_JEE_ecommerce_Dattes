@@ -16,7 +16,7 @@ public  class PaymentCart extends Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String cardName;
-    private String cardNumber;
+    private int cardNumber;
     private int expiryMonth;
     private int expiryYear;
     private int cvc;

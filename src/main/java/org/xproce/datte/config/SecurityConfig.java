@@ -46,6 +46,7 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager( admin, user);
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();

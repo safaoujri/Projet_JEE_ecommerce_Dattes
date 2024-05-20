@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Datte Store</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .card-img-top {
+            width: 100%; /* Pour que toutes les images aient la même largeur */
+            height: 200px; /* Hauteur fixe pour toutes les images (ajustez selon vos besoins) */
+            object-fit: cover; /* Redimensionne les images pour qu'elles remplissent entièrement l'espace sans déformation */
+        }
+
+        .card {
+            max-width: 300px; /* Largeur maximale de la carte (ajustez selon vos besoins) */
+        }
+
+        .search-bar {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .card-title {
+            font-size: 1.25rem; /* Taille de police pour le titre */
+            font-weight: bold; /* Texte en gras */
+            display: flex;
+            justify-content: space-between; /* Mettre le nom et le prix sur la même ligne */
+            align-items: center;
+        }
+
+        .card-text {
+            font-size: 0.875rem; /* Taille de police pour le texte */
+            color: #6c757d; /* Couleur de texte */
+            margin-bottom: 1rem; /* Espacement en bas de la description */
+        }
+
+        .card-price {
+            font-size: 1rem; /* Taille de police pour le prix */
+            font-weight: bold; /* Texte en gras */
+            color: #a1290d; /* Couleur verte pour le prix */
+            margin-left: 10px; /* Espacement à gauche du prix */
+        }
+
+        .table-container {
+            margin-top: 2rem; /* Ajustez selon vos besoins */
+        }
+
+        .navbar-brand {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            display: inline-block;
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem; /* Ajout d'un espacement au-dessus des boutons */
+        }
+
+        .button-container .btn {
+            background-color: #a1290d; /* Couleur de fond des boutons */
+            color: white; /* Couleur du texte des boutons */
+            font-size: 13px; /* Taille de police des boutons */
+            padding: 0.5rem 1rem; /* Padding des boutons */
+        }
+
+        .prix-total-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="home" id="home">
+        <!-- Barre "Le Sac D'achat" -->
+        <nav class="navbar navbar-light bg-light justify-content-center">
+            <span class="navbar-brand mb-0 h1">Le Sac D'achat</span>
+        </nav>
+
+        <div class="prix-total-container">
+            <h2>Prix total : <span th:text="${prixTotal} + ' DH'"></span></h2>
+        </div>
+
+        <div class="table-container">
+            <div class="content">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom du datte</th>
+                        <th>Prix du datte</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="panier : ${listeDesProduitsDansLePanier}">
+                        <td><img th:src="@{|image/${panier.produit.image}|}" alt="Image du produit" width="150" height="100"/></td>
+                        <td><span th:text="${panier.produit.nom}"></span></td>
+                        <td><span th:text="${panier.produit.prix}"></span></td>
+                        <td>
+                            <div class="plant-item-options">
+                                <a class="a2" onclick="return confirm('Are you sure !!!')" th:href="@{/removedupanier/{id}(id=${panier.produit.id})}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <form method="post" action="/vider-panier">
+                <button type="submit" class="btn">Vider le Sac</button>
+            </form>
+            <form method="get" action="/afficher-commande">
+                <button type="submit" class="btn">Passer la commande</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

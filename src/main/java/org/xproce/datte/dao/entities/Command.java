@@ -17,11 +17,15 @@ public class Command {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date dateCommande;
-    private double montant;
+    private double Total;
     @ManyToOne
     private Utilisateur utilisateur;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Produit> produits;
     @OneToOne
     private PaymentCart paiement;
+    @OneToMany(mappedBy = "commande")
+    private Collection<Livraison> livraisons;
+    @ManyToOne
+    private Adress adressLivraison;
 }

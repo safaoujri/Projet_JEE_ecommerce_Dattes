@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collection;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,5 +21,7 @@ public class Adress {
     private String pays;
     @ManyToOne
     private Utilisateur utilisateur;
+    @OneToMany(mappedBy = "adressLivraison", fetch = FetchType.EAGER)
+    private Collection<Command> commandes;
 
 }
