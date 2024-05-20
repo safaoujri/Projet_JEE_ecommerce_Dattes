@@ -31,6 +31,8 @@ public class Produit {
     private Collection<Command> commande ;
     @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
     private Collection<Livraison> livraison;
+    @OneToMany(mappedBy = "produit")
+    private Collection<Panier> paniers;
 
 
 

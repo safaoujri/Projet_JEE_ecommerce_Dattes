@@ -9,4 +9,5 @@ import org.xproce.datte.dao.entities.Produit;
 @Transactional
 public interface ProduitRepository extends JpaRepository<Produit,Integer> {
     Page<Produit> findByNomContains(String keyword, Pageable pageable);
+    
 }

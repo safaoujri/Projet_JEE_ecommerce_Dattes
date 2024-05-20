@@ -107,11 +107,24 @@ public class ProduitController {
         return "login";
     }
     @GetMapping("/listProduit")
-    public  String list(Model model){
-        List<Produit> produits=produitManager.getProduit();
-        model.addAttribute("list",produits);
+    public String list(Model model,
+                       @RequestParam(name = "page", defaultValue = "0") int page,
+                       @RequestParam(name = "taille", defaultValue = "6") int taille,
+                       @RequestParam(name = "search", defaultValue = "") String keyword){
+        Page<Produit> produits;
+        if (keyword.isEmpty()) {
+            produits = produitManager.getAllProduits(page, taille);
+        } else {
+            produits = produitManager.searchProduits(keyword, page, taille);
+        }
+        model.addAttribute("list", produits.getContent());
+        int[] pages = new int[produits.getTotalPages()];
+        model.addAttribute("pages", pages);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
         return "listproduit";
     }
+
     @GetMapping("/infodatte")
     public String info(){
         return "infodatte";

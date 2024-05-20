@@ -24,7 +24,7 @@ public class PaymentController {
     public String CreePayment(Model model, @RequestParam(name = "id" ,defaultValue = "") Integer id,
                               @RequestParam(name = "montant") double montant,
                               @RequestParam(name = "cardName") String cardName,
-                              @RequestParam(name = "cardNumber") String cardNumber,
+                              @RequestParam(name = "cardNumber") int cardNumber,
                               @RequestParam(name = "expiryMonth") int expiryMonth,
                               @RequestParam(name = "expiryYear") int expiryYear,
                               @RequestParam(name = "commande") Command commande,

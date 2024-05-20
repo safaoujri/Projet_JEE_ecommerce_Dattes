@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Index page</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #333333;
+
+    }
+    .container form{
+      width: 700px;
+      padding: 40px;
+      background: white;
+      border-radius: 10px;
+    }
+    form .row{
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .row .column{
+      flex: 1 1 250px;
+    }
+    .column .title{
+      font-size: 20px;
+      color: black;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .column .input-box{
+      margin: 15px ;
+    }
+    .input-box span{
+      display: block;
+      margin-bottom: 10px;
+    }
+    .input-box input{
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .column .flex{
+      display: flex;
+      gap :15px
+    }
+    .flex .input-box{
+      margin-top: 5px;
+    }
+    form .btn{
+      width: 100%;
+      padding: 12px;
+      background: blueviolet;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      font-size: 17px;
+      color: white;
+      margin-top: 5px;
+      cursor: pointer;
+      transition: .5s;
+    }
+    form .btn:hover{
+      background: darkorchid;
+    }
+    .input-box img{
+      height: 25px;
+      margin-top: 5px;
+      filter: drop-shadow(0 0 1px #333333);
+
+    }
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="container">
+    <form action="/creerOnce" method="post" enctype="multipart/form-data">
+      <div class="row">
+        <div class="column">
+          <h3 class="title">Billing Address</h3>
+          <div class="input-box">
+            <span>Full Name :</span>
+            <input type="text" placeholder="Safa Oujri">
+          </div>
+          <div class="input-box">
+            <span>Email :</span>
+            <input type="email" placeholder="exemple@gmail.com">
+          </div>
+          <div class="input-box">
+            <span>Adress:</span>
+            <input type="text" placeholder="Room -Street">
+          </div>
+          <div class="input-box">
+            <span>City :</span>
+            <input type="text" placeholder="Casablanca">
+          </div>
+          <div class="flex">
+            <div class="input-box">
+              <span>State :</span>
+              <input type="text" placeholder="Casablanca">
+            </div>
+            <div class="input-box">
+              <span>Zip Code :</span>
+              <input type="number" placeholder="123 456">
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <h3 class="title">Payment</h3>
+          <div class="input-box">
+            <span>Card Accepted :</span>
+            <img src="image/imgcards.png" alt="">
+
+          </div>
+          <div class="input-box">
+            <span>Name On Card:</span>
+            <input type="text" placeholder="safaoujri">
+          </div>
+          <div class="input-box">
+            <span>Credit Card Number:</span>
+            <input type="number" placeholder="1111 2222 3333 44444">
+          </div>
+          <div class="input-box">
+            <span>Exp. Month :</span>
+            <input type="text" placeholder="August">
+          </div>
+          <div class="flex">
+            <div class="input-box">
+              <span>Exp. Year :</span>
+              <input type="number" placeholder="2024">
+            </div>
+            <div class="input-box">
+              <span>CVC:</span>
+              <input type="number" placeholder="123">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button th:href="@{/listPayment}" type="submit" class="btn">Submit</button>
+
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

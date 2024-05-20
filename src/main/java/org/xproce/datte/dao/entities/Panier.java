@@ -5,21 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Livraison {
+public class Panier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String adresse;
-    private Date dateLivraison;
 
     @ManyToOne
+    @JoinColumn(name = "produit_id")
     private Produit produit;
-    @ManyToOne
-    private Command commande;
+
+    public Panier(Produit produit) {
+        this.produit=produit;
+    }
 }

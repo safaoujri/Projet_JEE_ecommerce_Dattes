@@ -21,15 +21,39 @@
             max-width: 300px; /* Largeur maximale de la carte (ajustez selon vos besoins) */
         }
 
+        .search-bar {
+            max-width: 500px;
+            width: 100%;
+        }
+        .card-title {
+            font-size: 1.25rem; /* Taille de police pour le titre */
+            font-weight: bold; /* Texte en gras */
+            display: flex;
+            justify-content: space-between; /* Mettre le nom et le prix sur la même ligne */
+            align-items: center;
+        }
+
+        .card-text {
+            font-size: 0.875rem; /* Taille de police pour le texte */
+            color: #6c757d; /* Couleur de texte */
+            margin-bottom: 1rem; /* Espacement en bas de la description */
+        }
+
+        .card-price {
+            font-size: 1rem; /* Taille de police pour le prix */
+            font-weight: bold; /* Texte en gras */
+            color: #a1290d; /* Couleur verte pour le prix */
+            margin-left: 10px; /* Espacement à gauche du prix */
+        }
     </style>
 </head>
 <body>
 <div layout:fragment="content">
-        <div  class="card-header">List des Dattes</div>
-        <div class="card-body">
-            <div class="d-flex justify-content-center">
-                <form method="get" th:action="@{/indexpage}">
-                    <input type="text" name="search" th:value="${keyword}"/>
+    <div class="container">
+        <div class="row justify-content-center my-4">
+            <div class="col-md-6">
+                <form method="get" th:action="@{/listProduit}" class="d-flex search-bar">
+                    <input type="text" name="search" th:value="${keyword}" class="form-control me-2" placeholder="Search..."/>
                     <button class="btn btn-primary" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-search" viewBox="0 0 16 16">
@@ -38,32 +62,39 @@
                     </button>
                 </form>
             </div>
-            <div class="row">
-                <div th:each="p : ${list}" class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" th:src="@{|image/${p.image}|}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${p.nom}">Nom du produit</h5>
-                            <p class="card-text" th:text="${p.description}">Description du produit</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a th:href="@{ajouterpayment}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <small class="text-muted" th:text="${p.prix}">Prix</small>
+        </div>
+        <div class="row">
+            <div th:each="p : ${list}" class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" th:src="@{|image/${p.image}|}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <span th:text="${p.nom}">Nom du produit</span>
+                            <span class="card-price" th:text="${p.prix} + ' DH'">Prix</span>
+                        </h5>
+                        <p class="card-text" th:text="${p.description}">Description du produit</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group w-100">
+                                <a th:href="@{'/ajouter-au-panier/' + ${p.id}}" class="btn btn-outline-secondary ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 6H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 15H4a.5.5 0 0 1-.491-.408L1.01 3H.5a.5.5 0 0 1-.5-.5zM3.14 7l1.25 6.667L12.25 14l1.25-6.667H3.14zM5 4.5A.5.5 0 0 1 5.5 4h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
+    </div>
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="nav-item me-2" th:each="p, stat: ${pages}">
+                <a th:class="${stat.index} == ${page} ? 'btn btn-primary' : 'btn btn-outline-primary'"
+                   th:text="${stat.index}" th:href="@{/listProduit(page=${stat.index},search=${keyword})}"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
