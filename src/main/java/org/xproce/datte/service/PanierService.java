@@ -44,7 +44,8 @@ public class PanierService implements PanierManger{
             return true;
         } else {
             return false; // Le produit n'était pas dans le panier
-        }    }
+        }
+    }
 
     @Override
     public void viderPanier() {
